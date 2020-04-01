@@ -2202,7 +2202,11 @@ declare module PlayFabAdminModels {
         | "InsightsManagementSetStorageRetentionBelowMinimum"
         | "InsightsManagementSetStorageRetentionAboveMaximum"
         | "AppleNotEnabledForTitle"
-        | "InsightsManagementNewActiveEventArchiveLimitInvalid"
+        | "InsightsManagementNewActiveEventExportLimitInvalid"
+        | "InsightsManagementSetPerformanceRateLimited"
+        | "PartyRequestsThrottledFromRateLimiter"
+        | "XboxServiceTooManyRequests"
+        | "NintendoSwitchNotEnabledForTitle"
         | "MatchmakingEntityInvalid"
         | "MatchmakingPlayerAttributesInvalid"
         | "MatchmakingQueueNotFound"
@@ -2259,6 +2263,11 @@ declare module PlayFabAdminModels {
         | "ExportCouldNotCreate"
         | "ExportNoBackingDatabaseFound"
         | "ExportCouldNotDelete"
+        | "ExportCannotDetermineEventQuery"
+        | "ExportInvalidQuerySchemaModification"
+        | "ExportQuerySchemaMissingRequiredColumns"
+        | "ExportCannotParseQuery"
+        | "ExportControlCommandsNotAllowed"
         | "TitleNotEnabledForParty"
         | "PartyVersionNotFound"
         | "MultiplayerServerBuildReferencedByMatchmakingQueue"
@@ -2277,6 +2286,7 @@ declare module PlayFabAdminModels {
         | "ExperimentationInvalidDuration"
         | "ExperimentationMaxExperimentsReached"
         | "MaxActionDepthExceeded"
+        | "TitleNotOnUpdatedPricingPlan"
         | "SnapshotNotFound";
 
     export interface GetActionsOnPlayersInSegmentTaskInstanceResult extends PlayFabModule.IPlayFabResultCommon  {
@@ -3040,7 +3050,8 @@ declare module PlayFabAdminModels {
         | "NintendoSwitch"
         | "FacebookInstantGames"
         | "OpenIdConnect"
-        | "Apple";
+        | "Apple"
+        | "NintendoSwitchAccount";
 
     export interface LogStatement {
         /** Optional object accompanying the message as contextual information */
@@ -3938,6 +3949,8 @@ declare module PlayFabAdminModels {
     export interface TaskInstanceBasicSummary {
         /** UTC timestamp when the task completed. */
         CompletedAt?: string;
+        /** Error message for last processing attempt, if an error occured. */
+        ErrorMessage?: string;
         /** Estimated time remaining in seconds. */
         EstimatedSecondsRemaining?: number;
         /** Progress represented as percentage. */
@@ -4212,6 +4225,8 @@ declare module PlayFabAdminModels {
     export interface UserAccountInfo {
         /** User Android device information, if an Android device has been linked */
         AndroidDeviceInfo?: UserAndroidDeviceInfo;
+        /** Sign in with Apple account information, if an Apple account has been linked */
+        AppleAccountInfo?: UserAppleIdInfo;
         /** Timestamp indicating when the user account was created */
         Created: string;
         /** Custom ID information, if a custom ID has been assigned */
@@ -4229,6 +4244,8 @@ declare module PlayFabAdminModels {
         /** User Kongregate account information, if a Kongregate account has been linked */
         KongregateInfo?: UserKongregateInfo;
         /** Nintendo Switch account information, if a Nintendo Switch account has been linked */
+        NintendoSwitchAccountInfo?: number;
+        /** Nintendo Switch device information, if a Nintendo Switch device has been linked */
         NintendoSwitchDeviceIdInfo?: number;
         /** OpenID Connect information, if any OpenID Connect accounts have been linked */
         OpenIdInfo?: UserOpenIdInfo[];
@@ -4256,6 +4273,12 @@ declare module PlayFabAdminModels {
     export interface UserAndroidDeviceInfo {
         /** Android device ID */
         AndroidDeviceId?: string;
+
+    }
+
+    export interface UserAppleIdInfo {
+        /** Apple subject ID */
+        AppleSubjectId?: string;
 
     }
 
@@ -4329,6 +4352,12 @@ declare module PlayFabAdminModels {
 
     }
 
+    export interface UserNintendoSwitchAccountIdInfo {
+        /** Nintendo Switch account subject ID */
+        NintendoSwitchAccountSubjectId?: string;
+
+    }
+
     export interface UserNintendoSwitchDeviceIdInfo {
         /** Nintendo Switch Device ID */
         NintendoSwitchDeviceId?: string;
@@ -4366,7 +4395,9 @@ declare module PlayFabAdminModels {
         | "ServerCustomId"
         | "NintendoSwitchDeviceId"
         | "FacebookInstantGamesId"
-        | "OpenIdConnect";
+        | "OpenIdConnect"
+        | "Apple"
+        | "NintendoSwitchAccount";
 
     export interface UserPrivateAccountInfo {
         /** user email address */
