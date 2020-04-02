@@ -1,4 +1,4 @@
-/// <reference path="../typings/PlayFab/PlayFabCloudScriptApi.d.ts" />
+/// <reference path="../typings/PlayFab/PlayFabInsightsApi.d.ts" />
 
 var PlayFab = typeof PlayFab != "undefined" ? PlayFab : {};
 
@@ -243,60 +243,36 @@ PlayFab.GenerateErrorReport = function (error) {
     return fullErrors;
 };
 
-PlayFab.CloudScriptApi = {
+PlayFab.InsightsApi = {
     ForgetAllCredentials: function () {
         PlayFab._internalSettings.sessionTicket = null;
         PlayFab._internalSettings.entityToken = null;
     },
 
-    ExecuteEntityCloudScript: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/ExecuteEntityCloudScript", request, "X-EntityToken", callback, customData, extraHeaders);
+    GetDetails: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/GetDetails", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 
-    ExecuteFunction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/ExecuteFunction", request, "X-EntityToken", callback, customData, extraHeaders);
+    GetLimits: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/GetLimits", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 
-    ListFunctions: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/ListFunctions", request, "X-EntityToken", callback, customData, extraHeaders);
+    GetOperationStatus: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/GetOperationStatus", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 
-    ListHttpFunctions: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/ListHttpFunctions", request, "X-EntityToken", callback, customData, extraHeaders);
+    GetPendingOperations: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/GetPendingOperations", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 
-    ListQueuedFunctions: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/ListQueuedFunctions", request, "X-EntityToken", callback, customData, extraHeaders);
+    SetPerformance: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/SetPerformance", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 
-    PostFunctionResultForEntityTriggeredAction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/PostFunctionResultForEntityTriggeredAction", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    PostFunctionResultForFunctionExecution: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/PostFunctionResultForFunctionExecution", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    PostFunctionResultForPlayerTriggeredAction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/PostFunctionResultForPlayerTriggeredAction", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    PostFunctionResultForScheduledTask: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/PostFunctionResultForScheduledTask", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    RegisterHttpFunction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/RegisterHttpFunction", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    RegisterQueuedFunction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/RegisterQueuedFunction", request, "X-EntityToken", callback, customData, extraHeaders);
-    },
-
-    UnregisterFunction: function (request, callback, customData, extraHeaders) {
-        return PlayFab._internalSettings.ExecuteRequestWrapper("/CloudScript/UnregisterFunction", request, "X-EntityToken", callback, customData, extraHeaders);
+    SetStorageRetention: function (request, callback, customData, extraHeaders) {
+        return PlayFab._internalSettings.ExecuteRequestWrapper("/Insights/SetStorageRetention", request, "X-EntityToken", callback, customData, extraHeaders);
     },
 };
 
-var PlayFabCloudScriptSDK = PlayFab.CloudScriptApi;
+var PlayFabInsightsSDK = PlayFab.InsightsApi;
 
